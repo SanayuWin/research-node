@@ -1,8 +1,8 @@
 version: '3'
 services:
   backend:
-    # build: ./backend
-    image: sanayu/firstdata:v1
+    build: ./backend
+    # image: sanayu/firstdata:v1
     ports:
       - "8087:8087"
     volumes:
