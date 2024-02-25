@@ -43,7 +43,9 @@ exports.generate = async (req, res) => {
       }
     }
     
-    res.json({ msg: `Successfully inserted ${successCount} records.` });
+    res.status(200).json({ 
+      msg: `Successfully inserted ${successCount} records.` 
+    });
     return;
   } catch (error){
     console.error('Error reading data.json:', error);
