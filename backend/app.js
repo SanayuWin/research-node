@@ -4,8 +4,17 @@ const cors = require('cors');
 const port = process.env.PORT || 8087;
 
 // Middleware for parsing JSON
-app.use(cors());    
 app.use(express.json());
+
+// Custom middleware to set headers
+app.use((req, res, next) => {
+    res.set({
+      'Vary': 'Accept-Encoding'
+    });
+  
+    next();
+});
+
 
 // Database connection
 const db = require('./config/db');

@@ -6,10 +6,8 @@ exports.generate = async (req, res) => {
 
   try {
 
-    // Retrieve the 'id' parameter from the query string
     const numRows = req.query.id ? parseInt(req.query.id) : 1;
     let successCount = 0;
-    // Generate the specified number of data rows
     for (let i = 0; i < numRows; i++) {
       var firstName = generateRandomName();
       var lastName = generateRandomName();
@@ -39,7 +37,6 @@ exports.generate = async (req, res) => {
         successCount++;
       } catch (insertError) {
         console.error('Error inserting data:', insertError);
-        // Handle the insert error (e.g., log it, skip the row, etc.)
       }
     }
     
