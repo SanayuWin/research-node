@@ -5,43 +5,74 @@ const db = require('../config/db');
 exports.generate = async (req, res) => {
 
   try {
+    // const numRows = req.query.id ? parseInt(req.query.id) : 1;
+    // let successCount = 0;
+    // for (let i = 0; i < numRows; i++) {
+    //   var firstName = generateRandomName();
+    //   var lastName = generateRandomName();
+    //   var fullName = firstName + lastName;
+    //   var dataRow = {
+    //     "First_Name": firstName,
+    //     "Last_Name": lastName,
+    //     "Email": generateRandomEmail(fullName),
+    //     "Date_of_Birth": generateRandomDate(),
+    //     "Gender": generateRandomGender(),
+    //     "Country": generateRandomCountry(),
+    //     "Annual_Income": generateRandomIncome(),
+    //     "Registration_Date": generateRandomDate(),
+    //     "Purchase_Type": generateRandomPurchaseType()
+    //   };
 
-    const numRows = req.query.id ? parseInt(req.query.id) : 1;
-    let successCount = 0;
-    for (let i = 0; i < numRows; i++) {
-      var firstName = generateRandomName();
-      var lastName = generateRandomName();
-      var fullName = firstName + lastName;
-      var dataRow = {
-        "First_Name": firstName,
-        "Last_Name": lastName,
-        "Email": generateRandomEmail(fullName),
-        "Date_of_Birth": generateRandomDate(),
-        "Gender": generateRandomGender(),
-        "Country": generateRandomCountry(),
-        "Annual_Income": generateRandomIncome(),
-        "Registration_Date": generateRandomDate(),
-        "Purchase_Type": generateRandomPurchaseType()
-      };
+    //   try {
+    //     const query = `
+    //       INSERT INTO customers (
+    //         first_name, last_name, email, date_of_birth, gender, 
+    //         country, annual_income, registration_date, purchase_type
+    //       ) VALUES (
+    //         $1, $2, $3, $4, $5, $6, $7, $8, $9
+    //       )
+    //     `;
+    //     await db.query(query, Object.values(dataRow));
+    //     successCount++;
+    //   } catch (insertError) {
+    //     console.error('Error inserting data:', insertError);
+    //   }
+    // }
 
-      try {
-        const query = `
-          INSERT INTO customers (
-            first_name, last_name, email, date_of_birth, gender, 
-            country, annual_income, registration_date, purchase_type
-          ) VALUES (
-            $1, $2, $3, $4, $5, $6, $7, $8, $9
-          )
-        `;
-        await db.query(query, Object.values(dataRow));
-        successCount++;
-      } catch (insertError) {
-        console.error('Error inserting data:', insertError);
-      }
+
+    var firstName = generateRandomName();
+    var lastName = generateRandomName();
+    var fullName = firstName + lastName;
+    var dataRow = {
+      "First_Name": firstName,
+      "Last_Name": lastName,
+      "Email": generateRandomEmail(fullName),
+      "Date_of_Birth": generateRandomDate(),
+      "Gender": generateRandomGender(),
+      "Country": generateRandomCountry(),
+      "Annual_Income": generateRandomIncome(),
+      "Registration_Date": generateRandomDate(),
+      "Purchase_Type": generateRandomPurchaseType()
+    };
+
+    try {
+      const query = `
+        INSERT INTO customers (
+          first_name, last_name, email, date_of_birth, gender, 
+          country, annual_income, registration_date, purchase_type
+        ) VALUES (
+          $1, $2, $3, $4, $5, $6, $7, $8, $9
+        )
+      `;
+      await db.query(query, Object.values(dataRow));
+      successCount++;
+    } catch (insertError) {
+      console.error('Error inserting data:', insertError);
     }
+   
     
     res.status(200).json({ 
-      msg: `Successfully inserted ${successCount} records.` 
+      msg: `Successfully insert` 
     });
     return;
   } catch (error){
