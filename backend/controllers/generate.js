@@ -9,6 +9,7 @@ exports.generate = async (req, res) => {
     var firstName = generateRandomName();
     var lastName = generateRandomName();
     var fullName = firstName + lastName;
+    var randomUrl = `https://randomurl.com/${fullName}`;
     var dataRow = {
       "First_Name": firstName,
       "Last_Name": lastName,
@@ -18,16 +19,17 @@ exports.generate = async (req, res) => {
       "Country": generateRandomCountry(),
       "Annual_Income": generateRandomIncome(),
       "Registration_Date": generateRandomDate(),
-      "Purchase_Type": generateRandomPurchaseType()
+      "Purchase_Type": generateRandomPurchaseType(),
+      "URL_Temp": randomUrl
     };
 
     try {
       const query = `
         INSERT INTO customers (
           first_name, last_name, email, date_of_birth, gender, 
-          country, annual_income, registration_date, purchase_type
+          country, annual_income, registration_date, purchase_type, url_temp
         ) VALUES (
-          $1, $2, $3, $4, $5, $6, $7, $8, $9
+          $1, $2, $3, $4, $5, $6, $7, $8, $9, $10
         )
       `;
       await db.query(query, Object.values(dataRow));
