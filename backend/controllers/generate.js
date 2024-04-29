@@ -33,7 +33,6 @@ exports.generate = async (req, res) => {
         )
       `;
       await db.query(query, Object.values(dataRow));
-      successCount++;
     } catch (insertError) {
       console.error('Error inserting data:', insertError);
     }
